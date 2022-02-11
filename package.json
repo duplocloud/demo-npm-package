@@ -1,6 +1,6 @@
 {
   "name": "@duplocloud/demo-npm-package",
-  "version": "1.4.302",
+  "version": "1.4.303",
   "description": "",
   "main": "index.js",
   "scripts": {

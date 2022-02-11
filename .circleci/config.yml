@@ -9,4 +9,4 @@ jobs:
 workflows:
   build_test_publish:
     jobs:
-      - install-node-example
+      - build

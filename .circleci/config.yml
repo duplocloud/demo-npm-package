@@ -1,0 +1,17 @@
+version: '2.1'
+orbs:
+  node: circleci/node@x.y
+jobs:
+  install-nodejs:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
+      - run: node --version
+workflows:
+  build_test_publish:
+    jobs:
+      - install-node-example

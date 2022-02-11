@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/duplocloud/demo-npm-package#readme",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
+  },
+  "devDependencies": {
+    "release-it": "14.12.4"
   }
 }

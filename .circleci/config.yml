@@ -15,7 +15,7 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
-#      - run: npm install
+      - run: npm install
 #      - run:
 #          name: Run tests
 #          command: npm test
@@ -41,8 +41,8 @@ jobs:
           command: npm publish
 
 workflows:
-  version: 2
-  test-deploy:
+  version: 2.1
+  build_test_deploy:
     jobs:
       - build_and_test:
           filters:
@@ -52,7 +52,5 @@ workflows:
           requires:
             - build_and_test
           filters:
-            tags:
-              only: /^v.*/
             branches:
-              ignore: /.*/
+              only: master

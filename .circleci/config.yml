@@ -45,6 +45,8 @@ jobs:
       - run:
           name: Publish package
           command: npm run release --ci --major --no-git.requireCleanWorkingDir
+          env:
+            GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
 
 workflows:
   version: 2.1

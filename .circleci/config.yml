@@ -57,6 +57,8 @@ jobs:
           command: |
             git checkout develop
             npm --no-git-tag-version version minor 
+            git add package.json package-lock.json
+            git commit -m "Bumpled version"
             git push origin develop
      
 workflows:

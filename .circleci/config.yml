@@ -12,6 +12,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - dynamo-lock/setup
       - run:
           name: Get a Staging Lock
           command: |

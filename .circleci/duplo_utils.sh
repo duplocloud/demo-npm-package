@@ -261,7 +261,7 @@ lock(){
             lock
 }
 
-un_lock(){
+unlock(){
   lock_name=$1
   ttl=$2
   with_aws /tmp/dynolocker_linux_amd64 \

@@ -63,10 +63,23 @@ jobs:
           command: echo "//npm.pkg.github.com/:_authToken=$GIT_TOKEN" > ~/repo/.npmrc
       - run:
           name: Publish package
-          command: npm run release --ci --major --no-git.requireCleanWorkingDir
-          env:
-            GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-
+          command: npm publish
+      - run:
+          name: Create tag
+          command: |
+            tag=$(node -p "require('./package.json').version")
+            echo "Creating tag"
+            git tag -a "v${tag}" -m "New version ${tag}"
+            git push origin "v${tag}"
+      - run:
+          name: Bump version in develop
+          command: |
+            git checkout develop
+            npm --no-git-tag-version version minor 
+            git add package.json package-lock.json
+            git commit -m "Bumpled version"
+            git push origin develop
+     
 workflows:
   version: 2.1
   build_test_deploy:

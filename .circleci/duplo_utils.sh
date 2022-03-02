@@ -258,6 +258,7 @@ lock(){
             --table "ci_locks" \
             --name "${lock_name}" \
             --ttl $ttl \
+            --region "us-west-2" \
             lock
 }
 
@@ -269,5 +270,6 @@ unlock(){
             --table "ci_locks" \
             --name "${lock_name}" \
             --ttl $ttl \
+            --region "us-west-2" \
             unlock
 }

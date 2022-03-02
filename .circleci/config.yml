@@ -88,6 +88,8 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+          context:
+            - global
       - deploy:
           requires:
             - build_and_test

@@ -1,4 +1,7 @@
 version: 2.1
+orbs: 
+  dynamo-lock: gastfreund/dynamo-lock@1.0.1
+
 defaults: &defaults
   working_directory: ~/repo
   docker:
@@ -9,6 +12,11 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run:
+          name: Get a Staging Lock
+          command: |
+            source ./.circleci/duplo_utils.sh
+            lock staging_deployment 300
 
       - restore_cache:
           keys:
@@ -16,14 +24,25 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
-#      - run:
-#          name: Run tests
-#          command: npm test
+      - run:
+          name: Run tests
+          command: sleep 120
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Release a Staging Lock
+          command: |
+            source ./.circleci/duplo_utils.sh
+            unlock staging_deployment 300
+      - run:
+          name: Release a Staging Lock on fail
+          command: |
+            source ./.circleci/duplo_utils.sh
+            unlock staging_d
 
       - persist_to_workspace:
           root: ~/repo
